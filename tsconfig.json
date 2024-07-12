@@ -7,14 +7,14 @@
     "jsx": "preserve",
     "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "noEmit": false,
-    "outDir": "dist",
+    "outDir": "./dist",
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext"
   },
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["lib/*.ts"],
   "exclude": ["node_modules"]
 }

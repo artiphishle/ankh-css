@@ -1,11 +1,10 @@
 {
   "name": "ankh-css",
-  "version": "1.0.0",
+  "version": "1.0.9",
   "description": "Ankhorage CSS Tools",
   "main": "index.js",
-  "directories": {
-    "lib": "lib"
-  },
+  "type": "module",
+  "files": ["dist", "index.js"],
   "scripts": {
     "build": "tsc"
   },
