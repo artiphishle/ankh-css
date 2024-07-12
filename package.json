@@ -1,0 +1,32 @@
+{
+  "name": "ankh-css",
+  "version": "1.0.0",
+  "description": "Ankhorage CSS Tools",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/artiphishle/ankh-css.git"
+  },
+  "keywords": [
+    "ankhorage",
+    "ankh",
+    "css",
+    "convert",
+    "parse"
+  ],
+  "author": "artiphishle",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/artiphishle/ankh-css/issues"
+  },
+  "homepage": "https://github.com/artiphishle/ankh-css#readme",
+  "devDependencies": {
+    "typescript": "^5.5.3"
+  }
+}

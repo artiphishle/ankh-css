@@ -1,1 +1,1 @@
-export * from lib/css.ts
+export * from "dist/css";

@@ -23,7 +23,7 @@ export function convertArrayToCss(styles: TStyle[]) {
 }
 
 export function convertCssToArray(css: string){
-  let styles = [];
+  let styles: TStyle[] = [];
 
   /** @todo */
 
