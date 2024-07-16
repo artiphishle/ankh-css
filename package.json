@@ -5,10 +5,14 @@
   "main": "index.js",
   "type": "module",
   "types": "dist/index.d.ts",
-  "files": ["dist", "index.js"],
+  "files": [
+    "dist",
+    "index.js"
+  ],
   "scripts": {
     "build": "tsc",
-    "prepublish": "tsc"
+    "prepublish": "tsc",
+    "test": "node ./test/test.js"
   },
   "repository": {
     "type": "git",
@@ -29,5 +33,8 @@
   "homepage": "https://github.com/artiphishle/ankh-css#readme",
   "devDependencies": {
     "typescript": "^5.5.3"
+  },
+  "dependencies": {
+    "cssnano": "^7.0.4"
   }
 }
