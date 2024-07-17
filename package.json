@@ -1,18 +1,19 @@
 {
   "name": "ankh-css",
-  "version": "1.1.0",
+  "version": "1.2.1",
   "description": "Ankhorage CSS Tools",
   "main": "index.js",
   "type": "module",
-  "types": "dist/index.d.ts",
+  "types": "dist/css.d.ts",
   "files": [
     "dist",
     "index.js"
   ],
   "scripts": {
     "build": "tsc",
+    "format": "npx prettier --write .",
     "prepublish": "tsc",
-    "test": "node ./test/test.js"
+    "test": "node --import tsx --test lib/test/test.ts"
   },
   "repository": {
     "type": "git",
@@ -32,6 +33,8 @@
   },
   "homepage": "https://github.com/artiphishle/ankh-css#readme",
   "devDependencies": {
+    "@types/node": "^20.14.11",
+    "tsx": "^4.16.2",
     "typescript": "^5.5.3"
   },
   "dependencies": {

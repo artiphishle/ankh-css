@@ -1,15 +1,11 @@
 import cssnano from 'cssnano';
-
-type THtmlElement = string;
-type TCssProperty = string;
-type TCssValue = string | number;
-export type TStyle = [THtmlElement, TCssProperty, TCssValue];
+import { TwMapper } from "./mappers/tw.mapper";
+import type { TStyle, TTailwindStyle } from './types';
 
 export async function convertArrayToCss(styles: TStyle[]) {
   const css = styles.map(([tag, prop, val]) => `${tag} { ${prop}: ${val}; }`).join(' ');
   return await optimizeCss(css);
 }
-
 export function convertCssToArray(css: string): TStyle[] {
   const styleArray: TStyle[] = [];
   const regex = /([^{]+)\{([^}]+)\}/g;
@@ -30,7 +26,12 @@ export function convertCssToArray(css: string): TStyle[] {
   }
   return styleArray;
 }
-
+export function convertCssToTailwind(css: string){
+  return TwMapper().convertCssToTailwind(css);
+}
+export async function convertTailwindToCss(twStyle: TTailwindStyle[]){
+  return await TwMapper().convertTailwindToCss(twStyle);
+}
 export async function optimizeCss(css: string): Promise<string> {
   try {
     const result = await cssnano().process(css, { from: undefined });
