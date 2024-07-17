@@ -21,8 +21,8 @@ test("convertCssToArray", () =>{
 });
 
 test("convertTailwindToCss", async () => {
-    const test: TTailwindStyle[] = [["p", "text-left"],["small", "text-right"]];
-    const expected = "p{text-align:left}small{text-align:right}";
+    const test: TTailwindStyle[] = [["p", "text-left"],["p", "p-2"],["p", "m-4"]];
+    const expected = "p{margin:1rem;padding:.5rem;text-align:left}";
     const received = await TwMapper().convertTailwindToCss(test);
     assert(received === expected);
 });

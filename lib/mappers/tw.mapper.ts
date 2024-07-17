@@ -5,38 +5,49 @@ import { TStyle, TTailwindStyle } from "../types";
 
 export function TwMapper(){
   /**
-   * PRIVATE
+   * Alias resolution, e.g. 'mt' = 'margin-top'
    */
-
-  // Alias resolution, e.g. 'mt' = 'margin-top'
   const twAlias = new Map();
   
-  /**
-   * Spacing > Padding
-   * @todo Support: px, py, ...
-   */
+   /** Spacing > Padding */
   twAlias.set("p", "padding");
   twAlias.set("pb", "padding-bottom");
   twAlias.set("pl", "padding-left");
   twAlias.set("pr", "padding-right");
   twAlias.set("pt", "padding-top");
   
-  /**
-   * Spacing > Margin
-   * @todo Support: mx, my, ...
-   */
+  /** Spacing > Margin */
   twAlias.set("m", "margin");
   twAlias.set("mb", "margin-bottom");
   twAlias.set("ml", "margin-left");
   twAlias.set("mr", "margin-right");
   twAlias.set("mt", "margin-top");
 
-  // Fully mappable conversions like 'text-center' = 'text-align: center'
-  const twMap = new Map();
-  
   /**
-   * Typography > Text Align
+   * Fully mappable conversions like 'text-center' = 'text-align: center'
    */
+  const twMap = new Map();
+
+  /** Layout > Aspect Ratio */
+  twMap.set("aspect-auto", ["aspect-ratio", "auto"])
+  twMap.set("aspect-square", ["aspect-ratio", "1 / 1"])
+  twMap.set("aspect-video", ["aspect-ratio", "16 / 9"])
+
+  /** Spacing > Padding */
+  function getMarginOrPaddingRem(spacing: string){
+    if(spacing === "0") return "0";
+    if(spacing === "auto") return "auto";
+    if(spacing === "none") return "0";
+
+    const ratio = 0.25
+
+    return `${parseInt(spacing) * ratio}rem`;
+  }
+
+  /** @todo Spacing > Margin */
+  /** @todo Spacing > Space Between */
+  
+  /** Typography > Text Align */
   twMap.set("text-center", ["text-align", "center"]);
   twMap.set("text-end", ["text-align", "end"]);
   twMap.set("text-justify", ["text-align", "justify"]);
@@ -62,21 +73,37 @@ export function TwMapper(){
     twStyles.forEach(([htmlElement, twStyles])=> {
       twStyles.split(" ").forEach((twStyle) => {
         /** @todo Support responsive classes or everything with a ':' before first '-' */
-        const twAbbr = twStyle.split("-")[0];
+        const [twAbbr,twVal] = twStyle.split("-");
         const directlyMapped = twMap.get(twStyle);
 
-        if(!directlyMapped) {
-          console.log(`Not directly mappable: ${twStyle}`);
-          const alias = twAlias.get(twStyle);
-          
-          return alias
-            ? console.log(`Alias found for ${twStyle}: ${alias} and ready to be used very soon.`)
-            : console.log(`Alias for ${twStyle} not in twAlias map yet.`);
+        if(directlyMapped) {
+          const [property, value] = directlyMapped;
+          const style: TStyle = [htmlElement, property, value];
+          return styleArray.push(style);
         }
+        
+        const alias = twAlias.get(twStyle);
 
-        const [property, value] = directlyMapped;
-        const style: TStyle = [htmlElement, property, value];
-        styleArray.push(style);
+        switch(twAbbr){
+          case "p":
+          case "pt":
+          case "pr":
+          case "pb":
+          case "pl":
+          case "m":
+          case "mt":
+          case "mr":
+          case "mb":
+          case "ml":
+            const value = getMarginOrPaddingRem(twVal);
+            styleArray.push([htmlElement, twAlias.get(twAbbr), value]);
+            break;
+
+          default:
+            return alias
+              ? console.log(`Alias found for ${twStyle}: ${alias} and ready to be used very soon.`)
+              : console.log(`Alias for ${twStyle} not in twAlias map yet.`);
+        }
       })
     });
 
@@ -88,9 +115,6 @@ export function TwMapper(){
     return await convertArrayToCss(styleArray);
   }
 
-  /**
-   * PUBLIC
-   */
   return {
     convertCssToTailwind,
     convertArrayToTailwind,

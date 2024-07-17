@@ -84,8 +84,9 @@ Array with `tagName`, `string` where string is the list of tailwind classes
 
 ```ts
 [
-  ["html", "m-none p-none"],
-  ["body", "m-none p-none"]
+  ["p", "text-left"],
+  ["p", "p-2"],
+  ["p", "m-4"]
 ]
 ```
 
@@ -94,9 +95,10 @@ Array with `tagName`, `string` where string is the list of tailwind classes
 CSS
 
 ```css
-html, body {
-  margin: none;
-  padding: none;
+p {
+  margin: 1rem;
+  padding: .5rem;
+  text-align: "left";
 }
 ```
 
@@ -169,6 +171,15 @@ Every contribution is very appreciated.
 4. The version containing the change will be released
 
 ## Changelog
+
+### Version 1.2.2
+
+- convertTailwindToCss() support: padding & margin (e.g. 'm-2 p-4')
+- Usage of 'node:test' testing library (available: Node 18+)
+
+### Version 1.2.1
+
+- convertTailwindToCss() support: text align (e.g. 'text-center')
 
 ### Version 1.2.0
 
