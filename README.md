@@ -86,8 +86,8 @@ Array with `tagName`, `string` where string is the list of tailwind classes
 [
   ["p", "text-left"],
   ["p", "p-2"],
-  ["p", "m-4"]
-]
+  ["p", "m-4"],
+];
 ```
 
 #### Output
@@ -97,7 +97,7 @@ CSS
 ```css
 p {
   margin: 1rem;
-  padding: .5rem;
+  padding: 0.5rem;
   text-align: "left";
 }
 ```
@@ -111,7 +111,8 @@ Under development
 CSS
 
 ```css
-html, body {
+html,
+body {
   margin: none;
   padding: none;
 }
@@ -124,8 +125,8 @@ Array with `tagName`, `string` where string is the list of tailwind classes
 ```ts
 [
   ["html", "m-none p-none"],
-  ["body", "m-none p-none"]
-]
+  ["body", "m-none p-none"],
+];
 ```
 
 ## Optimizer
@@ -151,7 +152,8 @@ body {
 #### After optimization
 
 ```css
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
 }
