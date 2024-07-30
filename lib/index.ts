@@ -48,3 +48,9 @@ export async function optimizeCss(css: string): Promise<string> {
     throw new Error(error);
   }
 }
+
+export function renderCss(css: string){
+  const $style = document.createElement('style');
+  $style.innerHTML = css;
+  document.head.appendChild($style);
+}
